@@ -18,3 +18,4 @@ export const initalStateEmployee : Employee = {
     phoneNumer : '',
     photo : '',
 }
+

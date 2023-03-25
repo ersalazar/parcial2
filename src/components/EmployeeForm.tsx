@@ -1,20 +1,21 @@
 //@ts-nocheck
 import useForm from "./useForm.tsx";
 import { Employee, initalStateEmployee } from "../interfaces/Employee.ts";
+import { useContext } from "react";
+import EmployeeContext from "../interfaces/EmployeeContextData.ts";
+import EmployeeContextData from "../interfaces/EmployeeContextData.ts";
 // import UploadAndDisplayImage from "./UploadAndDisplayImage.tsx";
 
 
 
+function EmployeeForm () {  
 
-function EmployeeForm () {
-
-    const [data, handleChange] = useForm<Employee>(initalStateEmployee)
+    const {data, handleChange} = useContext<EmployeeContextData>(EmployeeContext);
 
     const { name, dateOfBirth, position, email, phoneNumer, photo } = data
   
     return (
         <div>
-
             <div className="EmployeeForm">
                 <form className="EmployeeForm"> 
 
@@ -73,28 +74,6 @@ function EmployeeForm () {
                 onChange={handleChange}    />
                 </form>
             </div>
-
-            <h4>
-                Nombre: {name}
-                <br />
-                {/* Fecha de naciemiento: {dateOfBirth} */}
-                <br />
-                Puesto: {position}
-                <br />
-                Email: {email}
-                <br />
-                Teléfono: {phoneNumer}
-                <br />
-                {/* Fecha de naciemiento: {`${dateOfBirth.gatDate()}/${dateOfBirth.gatMonth() + 1}/${dateOfBirth.gatFullYear()}`} */}
-                Fecha de naciemiento: {dateOfBirth}
-                <br />
-                Foto: {photo}
-            </h4>
-            <img
-                alt="not found"
-                width={"250px"}
-                src={photo && URL.createObjectURL(photo)}
-            /> 
             
         </div>
 

@@ -1,11 +1,11 @@
 
 import './App.css';
-import EmployeeForm from './components/EmployeeForm.tsx';
+import EmployeeContextProvider from './components/EmployeeContextProvider.tsx';
 
 function App() {
   return (
     <div className="App">
-      <EmployeeForm />
+      <EmployeeContextProvider/>
     </div>
   );
 }
