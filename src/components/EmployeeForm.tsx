@@ -53,12 +53,14 @@ function EmployeeForm () {
 
                 <label htmlFor=""> Número de telefono: </label>
                 <input 
-                type="text"
-                name="phoneNumber"
+                type="number" 
+                name="phoneNumber" 
+                min="1000000000" 
+                max="9999999999"
                 value={phoneNumber}
-                onChange={handleChange} />
-
-
+                onChange={handleChange}
+                />
+  
                 <label>Selecciona una foto </label>
                 <input
                 type="file"
