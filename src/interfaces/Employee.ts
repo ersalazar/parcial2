@@ -5,7 +5,7 @@ export interface Employee {
     dateOfBirth : string,
     position : string,
     email : string,
-    phoneNumer : string,
+    phoneNumber : string,
     photo : string,
 
 }
@@ -15,7 +15,7 @@ export const initalStateEmployee : Employee = {
     dateOfBirth : '',
     position : 'Puesto... ',
     email : '',
-    phoneNumer : '',
+    phoneNumber : '',
     photo : '',
 }
 

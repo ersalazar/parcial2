@@ -1,19 +1,17 @@
 //@ts-nocheck
 import useForm from "./useForm.tsx";
 import { Employee, initalStateEmployee } from "../interfaces/Employee.ts";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import EmployeeContext from "../interfaces/EmployeeContextData.ts";
 import EmployeeContextData from "../interfaces/EmployeeContextData.ts";
 // import UploadAndDisplayImage from "./UploadAndDisplayImage.tsx";
-
-
 
 function EmployeeForm () {  
 
     const {data, handleChange} = useContext<EmployeeContextData>(EmployeeContext);
 
-    const { name, dateOfBirth, position, email, phoneNumer, photo } = data
-  
+    const { name, dateOfBirth, position, email, phoneNumber, photo } = data
+    
     return (
         <div>
             <div className="EmployeeForm">
@@ -56,23 +54,18 @@ function EmployeeForm () {
                 <label htmlFor=""> Número de telefono: </label>
                 <input 
                 type="text"
-                name="phoneNumer"
-                value={phoneNumer}
+                name="phoneNumber"
+                value={phoneNumber}
                 onChange={handleChange} />
 
-                {/* <label htmlFor=""> Selecciona una foto... </label>
-                <input 
-                type="file" 
-                name="photo"
-                value={} 
-                onChange={handleChange}
-                accept="image/png, image/jpeg" /> */}
 
+                <label>Selecciona una foto </label>
                 <input
                 type="file"
                 name="photo"
                 onChange={handleChange}    />
                 </form>
+
             </div>
             
         </div>

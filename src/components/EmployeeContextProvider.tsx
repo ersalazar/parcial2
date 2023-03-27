@@ -1,7 +1,7 @@
 //@ts-nocheck
 import EmployeeForm from './EmployeeForm.tsx';
 import EmployeeCard from './EmployeeCard.tsx';
-import { Employee, initalStateEmployee } from '../interfaces/Employee.ts';
+import { initalStateEmployee } from '../interfaces/Employee.ts';
 import useForm from './useForm.tsx';
 import EmployeeContext from '../interfaces/EmployeeContextData.ts';
 
