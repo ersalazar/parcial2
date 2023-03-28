@@ -4,6 +4,7 @@ import { Employee, initalStateEmployee } from "../interfaces/Employee.ts";
 import { useContext, useEffect, useState } from "react";
 import EmployeeContext from "../interfaces/EmployeeContextData.ts";
 import EmployeeContextData from "../interfaces/EmployeeContextData.ts";
+import useErrorHandle from "./useFormError.tsx";
 // import UploadAndDisplayImage from "./UploadAndDisplayImage.tsx";
 
 function EmployeeForm () {  
@@ -11,6 +12,28 @@ function EmployeeForm () {
     const {data, handleChange} = useContext<EmployeeContextData>(EmployeeContext);
 
     const { name, dateOfBirth, position, email, phoneNumber, photo } = data
+
+    const { errorState, handleErrorChange } = useErrorHandle(
+        {
+          name: "",
+          email: "",
+          phoneNumber: 0,
+        },
+        {
+          email: (value: string) =>
+            value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+              ? "Correo electrónico inválido"
+              : undefined,
+          phoneNumber: (value: string) =>
+            value && !/^[0-9]{10}$/.test(value) ? "Número de teléfono debe tener 10 dígitos" : undefined,
+            name: (value: string) => {
+                    if (value.length < 2 || value.length > 40) {
+                        return "El nombre debe tener más de 1 letra y menos de 40.";
+                    }
+                    return undefined;
+                },
+        }
+    );
     
     return (
         <div>
@@ -22,7 +45,12 @@ function EmployeeForm () {
                 type="text"
                 name="name"
                 value={name}
-                onChange={handleChange} />
+                onChange={(e) => {
+                    handleChange(e);
+                    handleErrorChange(e);
+                  }}
+                />
+                {errorState.name && <span style={{ color: "red" }}>{errorState.name}</span>}
 
                 <label htmlFor=""> Fecha de nacimiento: </label>
                 <input 
@@ -49,17 +77,24 @@ function EmployeeForm () {
                 type="text"
                 name="email"
                 value={email}
-                onChange={handleChange} />
+                onChange={(e) => {
+                    handleChange(e);
+                    handleErrorChange(e);
+                  }}
+                />
+                {errorState.email && <span style={{ color: "red" }}>{errorState.email}</span>}
 
                 <label htmlFor=""> Número de telefono: </label>
                 <input 
                 type="number" 
                 name="phoneNumber" 
-                min="1000000000" 
-                max="9999999999"
                 value={phoneNumber}
-                onChange={handleChange}
+                onChange={(e) => {
+                    handleChange(e);
+                    handleErrorChange(e);
+                  }}
                 />
+                {errorState.phoneNumber && <span style={{ color: "red" }}>{errorState.phoneNumber}</span>}
   
                 <label>Selecciona una foto </label>
                 <input

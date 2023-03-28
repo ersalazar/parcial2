@@ -29,27 +29,27 @@ function EmployeeCard () {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const block = () => {
-        if((!name|| !dateOfBirth || !position || !email || !phoneNumber || !photo)){
-            setError(true)
-            setErrorMessage('Todos los campos son obligatorios')
-        }else{
-            if (phoneNumber.length > 10 || phoneNumber.length < 10){
-                setError(true)
-                setErrorMessage('El número de telefono es inválido, tiene que ser de 10 dígitos.')
-            }
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-            if (emailRegex.test(email) == false)
-            {
-                setError(true)
-                setErrorMessage('Formato email incorrecto, ejemplo: Hola@hotmail.com o Hola@gmail.com')
-            }
-            else{
-                updateDisplays();
-                setIsBlocked(true);
-            }
-            
+        if (!name || !dateOfBirth || !position || !email || !phoneNumber || !photo) {
+          setError(true);
+          setErrorMessage("Todos los campos son obligatorios");
+        } else {
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(email)) {
+            setError(true);
+            setErrorMessage("Formato email incorrecto, ejemplo: Hola@hotmail.com");
+          } else if (phoneNumber.length !== 10) {
+            setError(true);
+            setErrorMessage("Formato número incorrecto, el número tiene que ser de 10 dígitos");
+          } else if (name.length < 2 || name.length > 40) {
+            setError(true);
+            setErrorMessage("El nombre debe tener más de 1 letra y menos de 40.");
+          } else {
+            updateDisplays();
+            setIsBlocked(true);
+          }
         }
-    }
+      };
+      
     const unblock = () => {
         setIsBlocked(false);
         updateDisplays()
