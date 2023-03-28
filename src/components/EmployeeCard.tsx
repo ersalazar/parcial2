@@ -1,13 +1,12 @@
 //@ts-nocheck
 import useForm from "./useForm.tsx";
 import { Employee, initalStateEmployee } from "../interfaces/Employee.ts";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useReducer } from "react";
 import EmployeeContext from "../interfaces/EmployeeContextData.ts";
 import EmployeeContextData from "../interfaces/EmployeeContextData.ts";
 import Modal from "./Modal/Modal.tsx";
+import {blockReducer, initialState} from '../interfaces/Reducer.ts'
 // import UploadAndDisplayImage from "./UploadAndDisplayImage.tsx";
-
-
 
 
 function EmployeeCard () {
@@ -25,9 +24,7 @@ function EmployeeCard () {
     
     const [error, setError] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState('')
-    const [isBlocked, setIsBlocked] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [{isBlocked}, dispatch] = useReducer(blockReducer, initialState);
     const block = () => {
         if (!name || !dateOfBirth || !position || !email || !phoneNumber || !photo) {
           setError(true);
@@ -44,16 +41,18 @@ function EmployeeCard () {
             setError(true);
             setErrorMessage("El nombre debe tener más de 1 letra y menos de 40.");
           } else {
+            dispatch({type: 'block'})
             updateDisplays();
-            setIsBlocked(true);
           }
         }
       };
       
     const unblock = () => {
-        setIsBlocked(false);
+        dispatch({type: 'unblock'})
         updateDisplays()
     }
+
+
 
     const updateDisplays = () => {
         setDisplayName(name);
