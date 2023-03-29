@@ -4,6 +4,7 @@ import EmployeeCard from './EmployeeCard.tsx';
 import { initalStateEmployee } from '../interfaces/Employee.ts';
 import useForm from './useForm.tsx';
 import EmployeeContext from '../interfaces/EmployeeContextData.ts';
+import '../styles/father.css'
 
 
 function EmployeeContextProvider() {
@@ -18,8 +19,10 @@ function EmployeeContextProvider() {
   return (
     <div>
       <EmployeeContext.Provider value = {contextData}>
-      <EmployeeForm />
-      <EmployeeCard />
+        <div className="father">
+          <EmployeeForm />
+          <EmployeeCard />
+        </div>
       </EmployeeContext.Provider>
     </div>
   );

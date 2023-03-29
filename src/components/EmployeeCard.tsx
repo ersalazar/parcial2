@@ -1,6 +1,5 @@
 //@ts-nocheck
-import useForm from "./useForm.tsx";
-import { Employee, initalStateEmployee } from "../interfaces/Employee.ts";
+import '../styles/Card.css'
 import { useContext, useEffect, useState, useReducer } from "react";
 import EmployeeContext from "../interfaces/EmployeeContextData.ts";
 import EmployeeContextData from "../interfaces/EmployeeContextData.ts";
@@ -74,31 +73,35 @@ function EmployeeCard () {
     }, [data])
 
     return (
-        <div className="EmployeeCard">
-            <button onClick={block}>Bloquear tarjeta</button>
-            <button onClick={unblock}>Desbloquear tarjeta</button>
+      <div>
+          <div className="EmployeeCard">
+              <h4>Foto:</h4>
+              <img
+                  alt="not found"
+                  width={"250px"}
+                  src={displayPhoto && URL.createObjectURL(displayPhoto)}
+              />
+              <h4>Nombre:  <br /> {displayName}</h4>
+            
+              <h4>Puesto:<br /> {displayPosition}</h4>
+              
+              <h4>Email: <br />{displayEmail}</h4>
+              
+              <h4>Teléfono: <br /> {displayPhoneNumber}</h4>
+              
+              <h4>Fecha de nacimiento:<br /> {displayDateOfBirth}</h4>
+              
+              
+              {error && (
+                  <Modal message={errorMessage} onClose={handleClose} />
+                )}
+              </div>
             {isBlocked && <h5>La tarjeta se encuentra bloqueada</h5>}
             {isBlocked === false && <h5>La tarjeta se encuentra desbloqueada</h5>}
-            <h4>Nombre: {displayName}</h4>
-            <br />
-            <h4>Puesto: {displayPosition}</h4>
-            <br />
-            <h4>Email: {displayEmail}</h4>
-            <br />
-            <h4>Teléfono: {displayPhoneNumber}</h4>
-            <br />
-            <h4>Fecha de nacimiento: {displayDateOfBirth}</h4>
-            <br />
-            <h4>Foto:</h4>
-            <img
-                alt="not found"
-                width={"250px"}
-                src={displayPhoto && URL.createObjectURL(displayPhoto)}
-            />
-            {error && (
-                <Modal message={errorMessage} onClose={handleClose} />
-              )}
-            </div>
+            <button onClick={block}>Bloquear tarjeta</button>
+            <button onClick={unblock}>Desbloquear tarjeta</button>
+
+      </div>
     );
 }
 
